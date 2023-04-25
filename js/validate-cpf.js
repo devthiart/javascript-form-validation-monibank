@@ -2,12 +2,13 @@
 export default function isCPF(field) {
   const cpf = field.value.replace(/\.|-/g, "");
 
-  if(checkRepeatedNumbers(cpf) && validFirstDigit(cpf) && validSecondDigit(cpf)) {
-    console.log("Valid CPF");
-  } else {
-    console.log("Invalid CPF");
-  }
-
+  if(
+    checkRepeatedNumbers(cpf) == false || 
+    validFirstDigit(cpf) == false|| 
+    validSecondDigit(cpf) == false
+  ) {
+    field.setCustomValidity('Este CPF não é válido.');
+  } 
 }
 
 function checkRepeatedNumbers(cpf) {
