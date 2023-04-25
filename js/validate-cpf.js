@@ -2,7 +2,12 @@
 export default function isCPF(field) {
   const cpf = field.value.replace(/\.|-/g, "");
 
-  console.log(checkRepeatedNumbers(cpf));
+  if(checkRepeatedNumbers(cpf) && validFirstDigit(cpf) && validSecondDigit(cpf)) {
+    console.log("Valid CPF");
+  } else {
+    console.log("Invalid CPF");
+  }
+
 }
 
 function checkRepeatedNumbers(cpf) {
@@ -19,5 +24,41 @@ function checkRepeatedNumbers(cpf) {
     '99999999999'
   ];
 
-  return repeatedNumbers.includes(cpf);
+  return (repeatedNumbers.includes(cpf) != true);
+}
+
+function validFirstDigit(cpf) {
+  let sum = 0;
+  let multiply = 10;
+
+  for(let size = 0; size < 9; size++) {
+    sum += cpf[size] * multiply;
+    multiply--;
+  }
+
+  sum = (sum * 10) % 11;
+
+  if(sum == 10 || sum == 11) {
+    sum = 0;
+  }
+
+  return (sum == cpf[9]);
+}
+
+function validSecondDigit(cpf) {
+  let sum = 0;
+  let multiply = 11;
+
+  for(let size = 0; size < 10; size++) {
+    sum += cpf[size] * multiply;
+    multiply--;
+  }
+
+  sum = (sum * 10) % 11;
+
+  if(sum == 10 || sum == 11) {
+    sum = 0;
+  }
+
+  return (sum == cpf[10]);
 }
