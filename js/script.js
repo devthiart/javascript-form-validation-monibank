@@ -90,8 +90,10 @@ function checkField(field) {
 
   if(inputValidator == false) {
     errorMessage.textContent = message;
+    field.classList.add("campo__escrita--erro");
   } else {
     errorMessage.textContent = '';
+    field.classList.remove("campo__escrita--erro");
   }
 
 }
